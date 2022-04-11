@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 项目SpringBoot 版本  -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.11.RELEASE</version>
+    </parent>
+
+    <groupId>com.waminet</groupId>
+    <artifactId>lance-waminet-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>XXX项目描述</description>
+
+    <organization>
+        <name>XXX公司项目名称</name>
+        <url>http://www.waminet.com</url>
+    </organization>
+
+    <modules>
+        <module>lance-waminet-commons</module>
+    </modules>
+
+    <properties>
+        <waminet.starter.core.version>1.0.0-SNAPSHOT</waminet.starter.core.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring.boot.version>2.1.11.RELEASE</spring.boot.version>
+        <spring.cloud.version>Greenwich.SR4</spring.cloud.version>
+        <spring.cloud.alibaba.version>2.1.0.RELEASE</spring.cloud.alibaba.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <swagger.version>2.9.2</swagger.version>
+        <docker.plugin.version>1.1.1</docker.plugin.version>
+        <spring.boot.admin.version>2.1.6</spring.boot.admin.version>
+        <mysql.version>5.1.26</mysql.version>
+        <seata.version>1.4.2</seata.version>
+        <openfeign.version>10.1.0</openfeign.version>
+        <hutool-all.version>5.7.22</hutool-all.version>
+        <rocketmq.version>4.8.0</rocketmq.version>
+        <rocketmq-sring-boot-statr>2.1.1</rocketmq-sring-boot-statr>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-seata</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <finalName>${project.name}-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>bootstrap.yml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-configuration-processor</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>DEV</id>
+            <activation>
+                <!--默认激活配置【开发环境】 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.name>DEV</profile.name>
+                <nacos.group>LANCE_WAMINET_GROUP</nacos.group>
+                <nacos.server-addr>127.0.0.1:8848</nacos.server-addr>
+                <nacos.namespace>b59aec3f-36ec-4a96-b3ee-d2b6b1dd7d40</nacos.namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>TEST</id>
+            <!-- 测试环境 -->
+            <properties>
+                <!-- 对应 Nacos 命名空间名称 -->
+                <profile.name>TEST</profile.name>
+                <!-- 对应注册中心IP地址 -->
+                <nacos.server-addr>127.0.0.1:8848</nacos.server-addr>
+                <!-- 对应 Group 名称  -->
+                <nacos.group>LANCE_WAMINET_GROUP</nacos.group>
+                <!-- 对应 Nacos 命名空间ID -->
+                <nacos.namespace>b59aec3f-36ec-4a96-b3ee-d2b6b1dd7d42</nacos.namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>UAT</id>
+            <properties>
+                <!-- UAT环境 【客户体验】 -->
+                <profile.name>UAT</profile.name>
+                <nacos.server-addr>127.0.0.1:8848</nacos.server-addr>
+                <nacos.group>LANCE_WAMINET_GROUP</nacos.group>
+                <nacos.namespace>b59aec3f-36ec-4a96-b3ee-d2b6b1dd7d42</nacos.namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>PROD</id>
+            <properties>
+                <!-- 生产环境 -->
+                <profile.name>PROD</profile.name>
+                <nacos.group>LANCE_WAMINET_GROUP</nacos.group>
+                <nacos.server-addr>127.0.0.1:8848</nacos.server-addr>
+                <nacos.namespace>waybill-prod</nacos.namespace>
+            </properties>
+        </profile>
+        <profile>
+            <id>SIT</id>
+            <properties>
+                <!-- 验收环境【公司验收】 -->
+                <profile.name>SIT</profile.name>
+                <nacos.server-addr>127.0.0.1:8848</nacos.server-addr>
+                <nacos.group>LANCE_WAMINET_GROUP</nacos.group>
+                <nacos.namespace>b59aec3f-36ec-4a96-b3ee-d2b6b1dd7d42</nacos.namespace>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
